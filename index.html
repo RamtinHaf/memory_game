@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/Assignment_6/app.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>AS6 memory game</title>
+</head>
+
+<div class="wrapper">
+
+
+
+
+
+
+    <body>
+        <div id="startScreen">
+            <p class="start">
+                press "s" to start/restart
+            </p>
+        </div>
+        <div id="main">
+
+        </div>
+        <div id="cardboard">
+
+
+        </div>
+        <script>
+            var app = new Vue({
+                // select the element for this app
+                el: "#cardboard"
+            })
+        </script>
+
+        <!--
+    <button class="start-over" v-if="!playing" @click="playing = !playing">START NEW GAME</button>-->
+    </body>
+    <audio controls class="audio">
+            <source src="/Assignment_6/Grand-Theft-Auto-San-Andreas-Theme-Song.mp3" type="audio/ogg">
+                <source src="/Assignment_6/Grand-Theft-Auto-San-Andreas-Theme-Song.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+
+
+</div>
+
+
+</html>

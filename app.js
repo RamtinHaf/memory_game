@@ -20,13 +20,13 @@ function turn() {
 function activegame() {
 
 }
-
+/* 
 function checkFinished() {
     if (foundCardArr.length == 16) {
         var winnerDiv = document.createElement("div");
 
         // winnerDiv.appendChild(newContent);
-        winnerDiv.innerHTML = "Player ? won this time Try again";
+        winnerDiv.innerHTML = "Player ? won this time. Press S to restart.";
         winnerDiv.style.width = '100px';
         winnerDiv.style.height = '100px';
         winnerDiv.style.background = 'red';
@@ -35,7 +35,7 @@ function checkFinished() {
         document.getElementById("main").appendChild(winnerDiv);
 
     }
-}
+} */
 
 //setTimeout(disableCards() { alert("Hello"); }, 3000);
 
@@ -118,7 +118,7 @@ function layCards() {
                     flipped: false,
                     matched: false,
                     removed: false,
-                    windowDiv: ""
+
 
                 };
 

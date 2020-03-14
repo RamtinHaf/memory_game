@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="/Assignment_6/app.js"></script>
+    <script src="app.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>AS6 memory game</title>
 </head>
@@ -22,14 +22,23 @@
             <p class="start">
                 press "s" to start/restart
             </p>
+            <p class="score">
+                Player 1:{{}}
+            </p>
+            <p class="score">
+                player 2: {{}}
+            </p>
         </div>
         <div id="main">
 
         </div>
+
+
+
         <div id="cardboard">
 
-
         </div>
+
         <script>
             var app = new Vue({
                 // select the element for this app
@@ -41,8 +50,8 @@
     <button class="start-over" v-if="!playing" @click="playing = !playing">START NEW GAME</button>-->
     </body>
     <audio controls class="audio">
-            <source src="/Assignment_6/Grand-Theft-Auto-San-Andreas-Theme-Song.mp3" type="audio/ogg">
-                <source src="/Assignment_6/Grand-Theft-Auto-San-Andreas-Theme-Song.mp3" type="audio/mpeg">
+            <source src="Grand-Theft-Auto-San-Andreas-Theme-Song.mp3" type="audio/ogg">
+                <source src="Grand-Theft-Auto-San-Andreas-Theme-Song.mp3" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
 

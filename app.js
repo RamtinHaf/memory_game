@@ -17,9 +17,7 @@ function turn() {
         </div>`
         
     }, */
-function activegame() {
 
-}
 /* 
 function checkFinished() {
     if (foundCardArr.length == 16) {
@@ -65,7 +63,7 @@ function checkCards() {
         // setTimeout(waitAbit1(), 2000);
         foundCardArr.push(card_1.img);
         foundCardArr.push(card_2.img);
-        checkFinished();
+        //checkFinished();
         checkArray = [];
 
 

@@ -1,98 +1,60 @@
 console.log("script loaded")
-var em;
+var e;
+let foundCardArr = [];
+let choiceA;
 
-var checkArray = [];
-var foundCardArr = [];
+let ChangePlayer = 0;
+
 
 function turn() {
     this.style.transform = "rotateY(180deg)";
 }
 
-/* function startGame(event) {
-    event.preventDefault();
-    var new_game = new Vue({
-        template: `
-        <div class="start">
-        Hi Welcome, click to start
-        </div>`
-        
-    }, */
 
-/* 
+
 function checkFinished() {
-    if (foundCardArr.length == 16) {
-        var winnerDiv = document.createElement("div");
-
-        // winnerDiv.appendChild(newContent);
-        winnerDiv.innerHTML = "Player ? won this time. Press S to restart.";
-        winnerDiv.style.width = '100px';
-        winnerDiv.style.height = '100px';
-        winnerDiv.style.background = 'red';
-        windowDiv.style.color = 'white';
-
-        document.getElementById("main").appendChild(winnerDiv);
-
-    }
-} */
-
-//setTimeout(disableCards() { alert("Hello"); }, 3000);
-
-function checkCards() {
-    // if (checkArray.length < 2) {}
-    if (checkArray.length === 2) {
-        card_1 = checkArray[0];
-        card_2 = checkArray[1];
-
-        if (card_1.img === card_2.img) {
-            this.flipped = true;
-            this.matched = true;
-            console.log("yessssiiiir")
-            card_1.removed = true;
-            card_2.removed = true;
-            // checkArray[0]._vnode.elm
+    if (foundCardArr.length == 8) {
+        console.log("Game finished")
+        if (player1.count1 < player2.count2) {
+            alert("Player 2 won this time!")
+        } else {
+            alert("Player 1 won this time!")
         }
-        if (card_1.flipped == true && card_2.flipped == true) {
-            //1 sec
-            setTimeout(function() { card_1.flipped = false }, 500);
-            setTimeout(function() { card_2.flipped = false }, 500);
-
-
-        }
-
-        // setTimeout(waitAbit0(), 1000);
-        // setTimeout(waitAbit1(), 2000);
-        foundCardArr.push(card_1.img);
-        foundCardArr.push(card_2.img);
-        //checkFinished();
-        checkArray = [];
 
 
     }
 
 }
 
-function layCards() {
+//shuffle imglist 
+function arrayShuffle(arr) {
+    let newPos, temp;
+    for (let i = arr.length - 1; i > 0; i--) {
+        newPos = Math.floor(Math.random() * (i + 1));
+        temp = arr[i];
+        arr[i] = arr[newPos];
+        arr[newPos] = temp;
+    }
+    return
+};
 
+function layCards() {
+    let AmountFlip = 0;
     let board = document.querySelector("#cardboard");
-    var imglist = ['break_git.png', 'css.jpg', 'error_git.png', 'ninja_git.jpg', 'lol_git.png', 'homer_git.png', 'dec_git.png', 'zombie_git.jpg', 'break_git.png', 'css.jpg', 'error_git.png', 'ninja_git.jpg', 'lol_git.png', 'homer_git.png', 'dec_git.png', 'zombie_git.jpg'];
+    const choices = ['break_git.png', 'css.jpg', 'error_git.png', 'ninja_git.jpg', 'lol_git.png', 'homer_git.png', 'dec_git.png', 'zombie_git.jpg']
+    let imglist = [...choices, ...choices]; //spread array in one array (...)
     board.innerHTML = "";
 
-    //shuffle imglist, gets shuffled for every new game. 
-    let arrayShuffle = function(arr) {
-        let newPos, temp;
+    arrayShuffle(imglist); //comment out for unshuffle 
 
-        for (let i = arr.length - 1; i > 0; i--) {
-            newPos = Math.floor(Math.random() * (i + 1));
-            temp = arr[i];
-            arr[i] = arr[newPos];
-            arr[newPos] = temp;
+
+    var score = new Vue({
+        el: "#amount-flip",
+
+        data: {
+            AmountFlip: 0
         }
-        return arr;
-    };
-
-    // let newShuffledArr = arrayShuffle(imglist);
-
-
+    });
     for (let i = 0; i < 16; i++) {
         //for every 16 cards 
 
@@ -103,20 +65,20 @@ function layCards() {
             template: `
             <div class="cardboard">
                 <div class="outer" v-on:click="flip($event)">
-                    <div class="card front" v-bind:style="{ transform:flipped? 'rotateZ(1080deg)': 'none', display: removed? 'none': ''}">
+                    <div class="card front" v-bind:style="{ transform:flipped ? 'rotateZ(1080deg)': 'none', display: removed ? 'none': ''}">
                         <img :src="img">
                     </div>
-                    <div class="card back" v-bind:style="{ transform: flipped? 'rotateY(-180deg)': 'none', display: removed? 'none':''}"></div>
+                    <div class="card back" v-bind:style="{ transform : flipped? 'rotateY(-180deg)': 'none', display : removed ? 'none':''}"></div>
                 </div>
             </div>
             `,
             data: function() {
                 return {
+                    id: i,
                     img: imglist[i],
                     flipped: false,
                     matched: false,
-                    removed: false,
-
+                    removed: false
 
                 };
 
@@ -124,18 +86,61 @@ function layCards() {
 
             methods: {
                 flip: function(o) {
-                    em = o;
-
-                    //console.log(em.target);
-
-                    if (this.flipped) {
-                        this.flipped = false;
-                    } else {
+                    if (choiceA === undefined) {
                         this.flipped = true;
-                        checkArray.push(this);
-                        checkCards();
-                        console.log(checkArray)
+                        choiceA = this;
+                    } else {
+                        if (choiceA.id == this.id) { // Hvis bruker trykker på samme kort skal det kortet bare snu seg.
+                            this.flipped = false;
+
+                        } else {
+                            this.flipped = true;
+                            if (choiceA.img === this.img) { // Hvis bruker gjetter riktig, fjern kort med SetTimeout
+
+                                if (player1.turn) {
+                                    player1.count1++;
+
+                                } else if (player2.turn) {
+                                    player2.count2++;
+
+                                }
+
+                                score.AmountFlip++;
+
+                                foundCardArr.push(choiceA.img); //legger til listen min slikt at jeg kan se når spillet er ferdig 
+                                //console.log(foundCardArr)
+
+                                setTimeout((x) => {
+                                    x.removed = true;
+                                    this.removed = true;
+                                }, 500, choiceA);
+
+                                //console.log(players[0])
+                                checkFinished();
+                            } else { // Hvis bruker gjetter feil, snu kortet
+                                setTimeout((x) => {
+                                    x.flipped = false;
+                                    this.flipped = false;
+                                }, 800, choiceA);
+                                score.AmountFlip++;
+                                if (player1.turn) {
+                                    player1.turn = false;
+                                    player2.turn = true;
+                                } else if (player2.turn) {
+                                    player1.turn = true;
+                                    player2.turn = false;
+
+                                }
+                            }
+                        }
+
+
+                        choiceA = undefined; // reset choiceA
+                        console.log("Amount of flips during this game: " + AmountFlip);
                     }
+
+                    //do checkFinished() here 
+                    this.function(o.target)
 
                 },
 
@@ -152,5 +157,6 @@ function layCards() {
 window.addEventListener("keyup", ev => {
     if (ev.keyCode === 83) {
         layCards();
+        //score.AmountFlip = 0; //prøver å resette amount of flipped cards
     }
 })

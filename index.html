@@ -12,30 +12,30 @@
 
 <div class="wrapper">
 
-
-
-
-
-
     <body>
         <div id="startScreen">
+            <h3>
+                Welcome to my Memory Game. Chill to the music while you play
+            </h3>
             <p class="start">
-                press "s" to start/restart
+
+                Press "S" to start/restart
             </p>
-            <p class="score">
-                Player 1:{{}}
+            <p id="amount-flip" class="start">
+                Amounts cards flipped: {{AmountFlip}}
             </p>
-            <p class="score">
-                player 2: {{}}
+            <p id="player1" class="start">
+                Player 1 Score: {{count1}}
             </p>
-        </div>
-        <div id="main">
+            <p id="player2" class="start">
+                Player 2 Score: {{count2}}
+            </p>
+
 
         </div>
-
-
 
         <div id="cardboard">
+
 
         </div>
 
@@ -46,10 +46,28 @@
             })
         </script>
 
+        <script>
+            var player1 = new Vue({
+                el: "#player1",
+                data: {
+                    count1: 0,
+                    turn: true
+
+                }
+            });
+            var player2 = new Vue({
+                el: "#player2",
+                data: {
+                    count2: 0,
+                    turn: false
+
+                }
+            })
+        </script>
         <!--
     <button class="start-over" v-if="!playing" @click="playing = !playing">START NEW GAME</button>-->
     </body>
-    <audio controls class="audio">
+    <audio controls autoplay class="audio">
             <source src="Grand-Theft-Auto-San-Andreas-Theme-Song.mp3" type="audio/ogg">
                 <source src="Grand-Theft-Auto-San-Andreas-Theme-Song.mp3" type="audio/mpeg">
                     Your browser does not support the audio element.

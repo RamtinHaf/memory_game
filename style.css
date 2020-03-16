@@ -44,6 +44,7 @@
 .audio {
     float: right;
     margin: 0;
+    visibility: hidden;
 }
 
 .card {
@@ -106,8 +107,4 @@
 .start {
     font-size: 30px;
     margin-left: 200px;
-}
-
-.score {
-    font-size: 40px;
 }
